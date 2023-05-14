@@ -1,0 +1,33 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+<h1 class="text-danger text-center">DANH SACH HOA DON DA THANH TOAN</h1>
+
+<div class="row">
+    <div class="col-md-12 col-xs-60">
+        <table  class="table">
+            <tr>
+                <th>ID hóa đơn</th>
+                <th>Tên bệnh nhân</th>
+                <th>Ngày khám</th>
+                <th>Tiền khám</th>
+                <th>Tiền thuốc</th>
+                <th>Tổng tiền</th>
+            </tr>
+            {% for s in stats %}
+            <tr>
+                <td>{{ s[0] }}</td>
+                <td>{{ s[1] }}</td>
+                <td>{{ s[2] }}</td>
+                <td>{{ s[3] }}</td>
+                <td>{{ s[4] }}</td>
+                <td>{{ s[5] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md-7 col-xs-12">
+        <canvas id="doanhthuStatsId"></canvas>
+    </div>
+</div>
+{% endblock %}

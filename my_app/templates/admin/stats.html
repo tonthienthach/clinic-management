@@ -1,0 +1,67 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+<h1 class="text-danger text-center">THONG KE VA BAO CAO DOANH THU</h1>
+
+<div class="row">
+    <div class="col-md-5 col-xs-12">
+        <table  class="table">
+            <tr>
+                <th>Ngay kham</th>
+                <th>So luong benh nhan</th>
+                <th>Doanh thu trong ngay</th>
+            </tr>
+            {% for s in stats %}
+            <tr>
+                <td>{{ s[0] }}</td>
+                <td>{% if s[1] %} {{ s[1] }} {% else %} 0 {% endif %} Benh nhan</td>
+                <td>{% if s[2] %} {{ s[2] }} {% else %} 0 {% endif %} VND</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md-7 col-xs-12">
+        <canvas id="doanhthuStatsId"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+let labels = [], info = [];
+
+{% for c in stats %}
+    labels.push('{{ c[0] }}')
+    info.push({{ c[2] }})
+{% endfor %}
+
+
+let colors = []
+for (let i = 0; i < labels.length; i++) {
+    let r = parseInt(Math.random() * 255)
+    let g = parseInt(Math.random() * 255)
+    let b = parseInt(Math.random() * 255)
+    colors.push(`rgb(${r}, ${g}, ${b})`)
+}
+
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'Thong ke doanh thu theo ngay',
+    data: info,
+    backgroundColor: colors,
+    hoverOffset: 4
+  }]
+};
+
+const config = {
+  type: 'doughnut',
+  data: data,
+};
+
+window.onload = function() {
+    let ctx = document.getElementById('doanhthuStatsId').getContext('2d')
+    new Chart(ctx, config);
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">PHONG MACH TU</a>
+        <a class="navbar-brand" href="/dsthuoc">Danh sách Thuốc</a>
+        <a class="navbar-brand" href="/dsphieukham">Lập Phiếu Khám Bệnh</a>
+        <a class="navbar-brand" href="/user-logout">Đăng xuất</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <h1 class="text-center text-danger">Danh Sách Thuốc</h1>
+    <form action="/dsthuoc" method="post">
+        <div class="form-group">
+
+            <input type="text"
+                   name="TenThuoc"
+                   class="form-control"
+
+                   id="TenThuoc" required>
+        </div>
+        <input type="submit" value="Search"/>
+    </form>
+
+
+    <div class="row">
+
+        <div class="col-md-100 jobs_index_middle_panels" style="padding-bottom: 20px">
+            <div class="card" style="width:70rem; height: 30rem;">
+                <div class="card-body">
+                    <table class="b-table">
+                        <tr>
+                            <th>Mã Thuốc</th>
+                            <th>Tên Thuốc</th>
+                            <th>Đơn Vị</th>
+
+                            <th>Giá</th>
+
+                        </tr>
+                        {% for p in thuoc %}
+                        <tr>
+                            <td>{{p.MaThuoc}}</td>
+                            <td>{{p.TenThuoc}}</td>
+                            <td>{{p.Donvi}}</td>
+
+                            <td>{{p.Gia}}</td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+
+<style>
+.b-table {
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1em;
+    min-width: 500px;
+    box-shadow: 0 0 20px rgb(64 64 64 / 24%);
+}
+.b-table thead tr {
+    background-color: #c50101;
+    color: #ffffff;
+    text-align: left;
+}
+.b-table th,
+.b-table td {
+    padding: 12px 70px;
+}
+.b-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+.b-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+.b-table tbody tr:last-of-type {
+    border-bottom: 2px solid #d10030;
+}
+.b-table tbody tr.active-row {
+    font-weight: 700;
+    color: #d10030;
+}
+
+
+</style>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">PHONG MACH TU</a>
+        <a class="navbar-brand" href="/dsthuoc">Danh sách Thuốc</a>
+        <a class="navbar-brand" href="/dsphieukham">Lập Phiếu Khám Bệnh</a>
+        <a class="navbar-brand" href="/user-logout">Đăng xuất</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <h1 class="text-center text-danger">Danh Sách Phiếu Khám Bệnh</h1>
+
+    <form action="/dsphieukham" method="post">
+        <div class="form-group">
+            <label for="MaBN">Mã bệnh nhân:</label>
+            <select name="MaBN" id="MaBN" class="form-control">
+            {% for p in benhnhan %}
+            <option value="{{p.MaBN}}">{{ p.MaBN }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="LoaiBenh">Loại bệnh:</label>
+            <select name="LoaiBenh" id="LoaiBenh" class="form-control">
+            {% for p in loaibenh %}
+            <option value="{{p.Ten}}">{{ p.Ten }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="TrieuChung">Triệu chứng:</label>
+            <input type="text"
+                   name="TrieuChung"
+                   class="form-control"
+                   placeholder="Nhap trieu chung..."
+                   id="TrieuChung" required>
+        </div>
+        <div class="form-group">
+            <label for="MaThuoc">Mã thuốc:</label>
+            <select name="MaThuoc" id="MaThuoc" class="form-control">
+            {% for p in thuoc %}
+            <option value="{{p.MaThuoc}}">{{ p.MaThuoc }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="SoLuong">Số lượng:</label>
+            <input type="text"
+                   name="SoLuong"
+                   class="form-control"
+                   placeholder="Nhap so luong..."
+                   id="SoLuong" required>
+        </div>
+
+        <div class="form-group">
+            <label for="CachSD">Cách sử dụng:</label>
+            <select name="CachSD" id="CachSD" class="form-control">
+            {% for p in cachsd %}
+            <option value="{{p.cachdung}}">{{ p.cachdung }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <input type="submit" value="Lập phiếu khám" class="btn btn-danger"/>
+
+    </form>
+    <br>
+    <br>
+    <div class="row">
+
+        <div class="col-md-100 jobs_index_middle_panels" style="padding-bottom: 20px">
+            <div class="card" style="width:70rem; height: 30rem;">
+                <div class="card-body">
+                    <table class="b-table">
+                        <tr>
+                            <th>ID</th>
+                            <th>NgayKham</th>
+                            <th>MaBN</th>
+                            <th>LoaiBenh</th>
+                            <th>TrieuChung</th>
+                            <th>MaThuoc</th>
+                            <th>SoLuong</th>
+                            <th>cach SD</th>
+
+                        </tr>
+                        {% for p in phieukham %}
+                        <tr>
+                            <td>{{p.id}}</td>
+                            <td>{{p.NgayKham}}</td>
+                            <td>{{p.MaBN}}</td>
+                            <td>{{p.LoaiBenh}}</td>
+                            <td>{{p.TrieuChung}}</td>
+                            <td>{{p.MaThuoc}}</td>
+                            <td>{{p.SoLuong}}</td>
+                            <td>{{p.CachSD}}</td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<style>
+.b-table {
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1em;
+    min-width: 500px;
+    box-shadow: 0 0 20px rgb(64 64 64 / 24%);
+}
+.b-table thead tr {
+    background-color: #c50101;
+    color: #ffffff;
+    text-align: left;
+}
+.b-table th,
+.b-table td {
+    padding: 12px 25px;
+}
+.b-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+.b-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+.b-table tbody tr:last-of-type {
+    border-bottom: 2px solid #d10030;
+}
+.b-table tbody tr.active-row {
+    font-weight: 700;
+    color: #d10030;
+}
+
+
+
+</style>
+</html>

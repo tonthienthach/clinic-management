@@ -1,0 +1,70 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+<h1 class="text-danger text-center">THONG KE VA BAO CAO SU DUNG THUOC</h1>
+<div class="row">
+    <div class="col-md-5 col-xs-12">
+        <table  class="table">
+            <tr>
+                <th>Ma thuoc</th>
+                <th>Ten thuoc</th>
+                <th>Don vi</th>
+                <th>So luong</th>
+                <th>So lan su dung</th>
+            </tr>
+            {% for s in stats %}
+            <tr>
+                <td>{{ s[0] }}</td>
+                <td>{{ s[1] }}</td>
+                <td>{{ s[2] }}</td>
+                <td>{{ s[3] }}</td>
+                <td>{{ s[4] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md-7 col-xs-12">
+        <canvas id="catStatsId"></canvas>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+let labels = [], info = [];
+
+{% for c in stats %}
+    {% if c[3] %}
+        labels.push('{{ c[1] }}')
+        info.push({{ c[3] }})
+    {% endif %}
+{% endfor %}
+
+
+let colors = []
+for (let i = 0; i < labels.length; i++) {
+    let r = parseInt(Math.random() * 255)
+    let g = parseInt(Math.random() * 255)
+    let b = parseInt(Math.random() * 255)
+    colors.push(`rgb(${r}, ${g}, ${b})`)
+}
+
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'Thong ke so luong thuoc ban ra',
+    data: info,
+    backgroundColor: colors,
+    hoverOffset: 4
+  }]
+};
+
+const config = {
+  type: 'bar',
+  data: data,
+};
+
+window.onload = function() {
+    let ctx = document.getElementById('catStatsId').getContext('2d')
+    new Chart(ctx, config);
+}
+</script>
+{% endblock %}

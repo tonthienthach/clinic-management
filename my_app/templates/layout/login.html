@@ -1,0 +1,34 @@
+<h1 class="text-center text-danger">DANG NHAP</h1>
+<form action="/login" method="post">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text"
+               name="username"
+               class="form-control"
+               placeholder="Nhap username..."
+               id="username">
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password"
+               name="password"
+               class="form-control"
+               placeholder="Nhap password..."
+               id="password">
+    </div>
+    <div class="form-group">
+        <label for="role">vai tro</label>
+        <select name="role" id="role">
+            <option value="Benh nhan">Benh nhan</option>
+            <option value="Bac si">Bac si</option>
+            <option value="Y ta">Y ta</option>
+            <option value="admin">admin</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Login</button>
+
+    </div>
+
+
+</form>

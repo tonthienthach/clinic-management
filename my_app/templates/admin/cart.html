@@ -1,0 +1,31 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}GIO HANG{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center text-info">THONG TIN THANH TOAN</h1>
+
+<table class="table">
+    <tr>
+        <th>Ten benh nhan</th>
+        <th>Ngay Kham</th>
+        <th>Tien Kham</th>
+        <th>Tien Thuoc</th>
+        <th>Tong Tien</th>
+
+        <th></th>
+    </tr>
+<div>
+    {% if current_user.is_authenticated %}
+    <input type="button"
+           onclick="pay()"
+           value="Thanh toan"
+           class="btn btn-success" />
+    {% else %}
+    <a href="/user-login?next=/cart">Dang nhap de thanh toan</a>
+    {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}
